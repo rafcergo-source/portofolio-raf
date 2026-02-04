@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails - Projet Photoshop</title>
+    <link rel="stylesheet" href="style.css"> <style>
+        .detail-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            color: rgb(0, 0, 0);
+        }
+        .glass-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 800px;
+            text-align: center;
+        }
+        .glass-box img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #000000;
+            text-decoration: none;
+            border: 1px solid #000000;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .back-link:hover { background: rgb(0, 0, 0); color: black; }
+    </style>
+</head>
+<body>
+    <div class="detail-container">
+        <div class="glass-box">
+            <h1>Projet : Parfum CHARM</h1>
+            <img src="projet photoshop.png" alt="Détails Parfum">
+            <p><strong>Description :</strong> Voici le détail de mon travail sur Photoshop...</p>
+            <p>J'ai utilisé des techniques de masquage et de colorimétrie pour ce rendu professionnel.</p>
+            
+            <a href="index.html" class="back-link">← Retour au portfolio</a>
+        </div>
+    </div>
+</body>
+</html>

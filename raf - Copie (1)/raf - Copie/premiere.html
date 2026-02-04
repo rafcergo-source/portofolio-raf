@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails - Montage Premiere Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: #0f172a; 
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+        }
+
+        .detail-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .glass-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            border-radius: 30px;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Style pour la vidéo ou l'image */
+        .media-container {
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        video, img {
+            width: 100%;
+            display: block;
+        }
+
+        .glass-box h1 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .text-info {
+            text-align: left;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .text-info p {
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .back-btn:hover {
+            background: white;
+            color: #0f172a;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="detail-container">
+        <div class="glass-box">
+            <h1>Montage Vidéo & Post-Production</h1>
+            
+            <div class="media-container">
+                <img src="project premiere.png" alt="Aperçu montage Premiere">
+            </div>
+
+            <div class="text-info">
+                <p><strong>Projet :</strong> Réalisation d'un montage dynamique (Publicité / Court-métrage).</p>
+                <p><strong>Outils utilisés :</strong> Adobe Premiere Pro, Cut, Étalonnage, Mixage audio.</p>
+                <p><strong>Description :</strong> Ce projet m'a permis de travailler sur le rythme de l'image et la narration. J'ai utilisé des transitions fluides et un travail précis sur la colorimétrie pour donner une ambiance unique à la vidéo.</p>
+            </div>
+
+            <a href="index.html" class="back-btn">← Retour au portfolio</a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio MMI - Crego Raphaël</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ffffff;
+            --secondary: #e8e8e8;
+            --glass: rgba(0, 0, 0, 0.05);
+            --glass-hover: rgba(0, 0, 0, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.12);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.6),
+                             0 0 40px rgba(255, 255, 255, 0.4),
+                             0 0 60px rgba(255, 255, 255, 0.2);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(255, 255, 255, 0.8),
+                             0 0 60px rgba(255, 255, 255, 0.6),
+                             0 0 90px rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        /* Navigation minimale et intégrée */
+        nav {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            background: var(--glass);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            padding: 8px;
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+        }
+
+        nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 12px 24px;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.5px;
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+        }
+
+        /* Hero ultra transparent */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 140px 50px 50px;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-title {
+            font-size: 6rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 20px;
+            line-height: 1.1;
+            letter-spacing: 4px;
+            animation: glow 4s ease-in-out infinite;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.6),
+                         0 0 80px rgba(255, 255, 255, 0.4),
+                         0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-title span {
+            background: linear-gradient(90deg, #fff 0%, #f0f0f0 50%, #fff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+        }
+
+        .hero-subtitle {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 25px;
+            font-weight: 300;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            text-shadow: 0 5px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            max-width: 800px;
+            margin: 0 auto 50px;
+            line-height: 2;
+            font-weight: 300;
+            text-shadow: 0 3px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 50px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(5px);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.2);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Sections ultra transparentes */
+        section {
+            padding: 100px 50px;
+            max-width: 1600px;
+            margin: 0 auto 40px;
+        }
+
+        .section-title {
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 80px;
+            color: var(--primary);
+            font-weight: 900;
+            letter-spacing: 3px;
+            animation: fadeInUp 1s ease-out;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.6),
+                         0 10px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Projets - Vraies icônes cliquables */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: var(--glass);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .project-card:hover {
+            background: var(--glass-hover);
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .project-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            transition: transform 0.4s ease;
+            filter: drop-shadow(0 5px 20px rgba(0, 0, 0, 0.5));
+        }
+
+        .project-card:hover .project-logo {
+            transform: scale(1.2) rotate(5deg);
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Modal ultra transparent */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .modal-content {
+            background: var(--glass);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 30px;
+            max-width: 1000px;
+            width: 100%;
+            padding: 60px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 50px 150px rgba(0, 0, 0, 0.8);
+            animation: fadeInUp 0.4s ease-out;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--primary);
+            font-size: 2rem;
+            cursor: pointer;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: rotate(90deg) scale(1.15);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+        }
+
+        .modal-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            display: block;
+            filter: drop-shadow(0 5px 30px rgba(0, 0, 0, 0.7));
+        }
+
+        .modal-title {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-weight: 900;
+            text-align: center;
+            letter-spacing: 2px;
+            text-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-description {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 40px;
+            font-weight: 300;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-link {
+            display: inline-block;
+            padding: 16px 45px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .modal-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Compétences */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }.contact-form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+}
+
+.contact-form input, .contact-form textarea {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    padding: 12px;
+    color: white;
+    font-family: inherit;
+}
+
+.contact-form input::placeholder, .contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    outline: none;
+    border-color: white;
+    background: rgba(255, 255, 255, 0.15);
+}
+.contact-container {
+    margin-top: 40px;
+    perspective: 1000px;
+}
+
+.glass-form {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.glass-form h3 {
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.input-group input, .input-group textarea {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1rem;
+    color: #fff;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    pointer-events: none;
+    transition: 0.3s;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Animation de l'étiquette qui monte */
+.input-group input:focus ~ label,
+.input-group input:valid ~ label,
+.input-group textarea:focus ~ label,
+.input-group textarea:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.input-group input:focus, .input-group textarea:focus {
+    border-bottom: 2px solid #fff;
+}
+
+.submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    background: white;
+    color: black;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
+    background: #f0f0f0;
+}
+        .skill-card {
+            background: var(--glass);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            border-radius: 20px;
+            padding: 50px 35px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s ease;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .skill-card:hover {
+            background: var(--glass-hover);
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .skill-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 25px;
+            filter: drop-shadow(0 5px 20px rgba(0, 0, 0, 0.5));
+        }
+
+        .skill-card:hover .skill-icon {
+            transform: scale(1.3) rotate(10deg);
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .skill-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 20px;
+            backdrop-filter: blur(3px);
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
+            border-radius: 15px;
+            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+
+        /* À propos */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-text h3 {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 35px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 0 5px 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .about-text p {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 25px;
+            line-height: 2;
+            font-weight: 300;
+            text-shadow: 0 3px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .profile-container {
+            max-width: 500px;
+            margin: 0 auto;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .profile-image {
+            width: 100%;
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.7);
+            transition: all 0.5s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Footer ultra transparent */
+        footer {
+            background: var(--glass);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            padding: 70px 40px;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 60px;
+        }
+
+        footer p {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            font-weight: 300;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.8);
+        }
+
+        .email-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 25px 0;
+            letter-spacing: 1px;
+            text-shadow: 0 3px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .email-link:hover {
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.9),
+                         0 5px 30px rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 35px 0;
+        }
+
+        .social-link {
+            width: 65px;
+            height: 65px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.4s ease;
+        }
+
+        .social-link svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-10px) scale(1.2);
+            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3.5rem; }
+            .hero-subtitle { font-size: 1.5rem; }
+            nav ul { flex-wrap: wrap; gap: 5px; }
+            .about-container { grid-template-columns: 1fr; gap: 50px; }
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            .skills-grid { grid-template-columns: repeat(2, 1fr); }
+            section { padding: 70px 30px; }
+            .modal-content { padding: 40px 30px; }
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="1764404760_1.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Navigation intégrée -->
+    <nav>
+        <ul>
+            <li><a href="#accueil" class="active">Accueil</a></li>
+            <li><a href="#projets">Projets</a></li>
+            <li><a href="#competences">Compétences</a></li>
+            <li><a href="#apropos">À propos</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <header id="accueil">
+        <div class="hero-content">
+            <h1 class="hero-title">Crego <span>Raphaël</span></h1>
+            <p class="hero-subtitle">Étudiant BUT MMI</p>
+            <p class="hero-description">
+                Passionné par le design, le développement web et la création multimédia. 
+                Découvrez mes projets et compétences.
+            </p>
+            <a href="#projets" class="cta-button">Découvrir</a>
+        </div>
+    </header>
+
+    <!-- Projets avec vraies icônes -->
+    <section id="projets">
+        <h2 class="section-title">Projets</h2>
+        <div class="projects-grid">
+            <!-- Adobe Illustrator -->
+            <div class="project-card" onclick="openModal('illustrator')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg" alt="Illustrator" class="project-logo">
+                <h3>Illustrator</h3>
+            </div>
+
+            <!-- Figma -->
+            <div class="project-card" onclick="openModal('figma')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" class="project-logo">
+                <h3>Figma</h3>
+            </div>
+
+            <!-- Photoshop -->
+            <div class="project-card" onclick="openModal('photoshop')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop" class="project-logo">
+                <h3>Photoshop</h3>
+                
+            </div>
+
+            <!-- HTML/CSS -->
+            <div class="project-card" onclick="openModal('htmlcss')">
+                <svg class="project-logo" viewBox="0 0 128 128">
+                    <path fill="#E44D26" d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z"/>
+                    <path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z"/>
+                    <path fill="#EBEBEB" d="M64 52.455H45.788L44.53 38.361H64V24.599H29.489l.33 3.692 3.382 37.927H64zm0 35.743l-.061.017-15.327-4.14-.979-10.975H33.816l1.928 21.609 28.193 7.826.063-.017z"/>
+                    <path fill="#fff" d="M63.952 52.455v13.763h16.947l-1.597 17.849-15.35 4.143v14.319l28.215-7.82.207-2.325 3.234-36.233.335-3.696h-3.708zm0-27.856v13.762h33.244l.276-3.092.628-6.978.329-3.692z"/>
+                </svg>
+                <h3>HTML/CSS</h3>
+            </div>
+
+            <!-- Premiere Pro -->
+            <div class="project-card" onclick="openModal('premiere')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg" alt="Premiere Pro" class="project-logo">
+                <h3>Premiere Pro</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals pour chaque logiciel -->
+    <div id="modal-illustrator" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('illustrator')">&times;</button>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg" alt="Illustrator" class="modal-logo">
+            <h2 class="modal-title">Projets Adobe Illustrator</h2>
+            <p class="modal-description">
+                Création de logos, illustrations vectorielles et identités visuelles avec Adobe Illustrator. 
+                Maîtrise des outils de dessin vectoriel, manipulation de formes, typographie et système de couleurs.
+                <br><br>
+                <strong>Réalisations :</strong> Logos d'entreprises, illustrations pour réseaux sociaux, 
+                charte graphique complète, pictogrammes et icônes personnalisées.
+            </p>
+            <div class="project-card">
+   
+    <h3>Projet Illustrator</h3>
+    <a href="illustrator.html" class="cta-button">Voir les détails</a>
+</div>
+        </div>
+    </div>
+
+    <div id="modal-figma" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('figma')">&times;</button>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" class="modal-logo">
+            <h2 class="modal-title">Projets Figma</h2>
+            <p class="modal-description">
+                Design d'interfaces UI/UX avec Figma. Création de maquettes interactives, prototypes haute-fidélité 
+                et systèmes de design complets. Collaboration en temps réel et workflow moderne.
+                <br><br>
+                <strong>Réalisations :</strong> Maquettes d'applications mobiles, interfaces web responsives, 
+                design systems, wireframes et prototypes cliquables.
+            </p>
+           <div class="project-card">
+    <h3>Design UI/UX - Figma</h3>
+    <a href="figma.html" class="cta-button">Voir les détails</a>
+</div>
+        </div>
+    </div>
+
+    <div id="modal-photoshop" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('photoshop')">&times;</button>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop" class="modal-logo">
+            <h2 class="modal-title">Projets Adobe Photoshop</h2>
+            <p class="modal-description">
+                Retouche photo professionnelle, montages créatifs et création de visuels avec Photoshop. 
+                Maîtrise des calques, masques, filtres et techniques de composition avancées.
+                <br><br>
+                <strong>Réalisations :</strong> Retouches photos, affiches événementielles, 
+                visuels pour réseaux sociaux, montages photo créatifs et manipulations d'images.
+            </p>
+           <div class="project-card">
+    <h3>Projet Photoshop</h3>
+    <a href="photoshop.html" class="cta-button">Voir les détails</a>
+</div>
+</div>
+        </div>
+    </div>
+
+    <div id="modal-htmlcss" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('htmlcss')">&times;</button>
+            <svg class="modal-logo" viewBox="0 0 128 128">
+                <path fill="#E44D26" d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z"/>
+                <path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z"/>
+            </svg>
+            <h2 class="modal-title">Projets HTML/CSS</h2>
+            <p class="modal-description">
+                Développement de sites web responsives avec HTML5 et CSS3. Intégration pixel-perfect, 
+                animations CSS avancées et optimisation des performances. Code propre et maintenable.
+                <br><br>
+                <strong>Réalisations :</strong> Sites vitrines, landing pages, portfolios interactifs, 
+                intégration de maquettes Figma, animations et effets visuels modernes.
+            </p>
+    <div class="project-card">
+    
+    <h3>Développement Web - HTML/CSS</h3>
+    <a href="portfolio.html" class="cta-button">Voir les détails</a>
+</div>
+</div>
+
+        </div>
+    </div>
+
+    <div id="modal-premiere" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('premiere')">&times;</button>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg" alt="Premiere Pro" class="modal-logo">
+            <h2 class="modal-title">Projets Premiere Pro</h2>
+            <p class="modal-description">
+                Montage vidéo professionnel avec Adobe Premiere Pro. Création de contenus dynamiques, 
+                étalonnage colorimétrique, effets visuels et post-production complète.
+                <br><br>
+                <strong>Réalisations :</strong> Vidéos promotionnelles, montages événementiels, 
+                contenus pour TikTok et Instagram, clips musicaux et vidéos corporates.
+            </p>
+            <div class="project-card">
+    <h3>Montage Vidéo - Premiere Pro</h3>
+    <a href="premiere.html" class="cta-button">Voir les détails</a>
+</div>
+        </div>
+    </div>
+
+    <!-- Compétences -->
+    <section id="competences">
+        <h2 class="section-title">Compétences</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg" alt="Design" class="skill-icon">
+                <h3>Design</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 75%;"></div>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <svg class="skill-icon" viewBox="0 0 128 128">
+                    <path fill="#E44D26" d="M19.037 113.876L9.032 1.661h109.936l-10.016 112.198-45.019 12.48z"/>
+                    <path fill="#F16529" d="M64 116.8l36.378-10.086 8.559-95.878H64z"/>
+                </svg>
+                <h3>HTML/CSS</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 60%;"></div>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Adobe_Premiere_Pro_CC_icon.svg" alt="Vidéo" class="skill-icon">
+                <h3>Vidéo</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 40%;"></div>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <svg class="skill-icon" viewBox="0 0 48 48">
+                    <rect width="48" height="48" rx="8" fill="#059669"/>
+                    <circle cx="24" cy="24" r="3" fill="white"/>
+                    <circle cx="14" cy="14" r="2" fill="white"/>
+                    <circle cx="34" cy="14" r="2" fill="white"/>
+                    <circle cx="14" cy="34" r="2" fill="white"/>
+                    <circle cx="34" cy="34" r="2" fill="white"/>
+                </svg>
+                <h3>Réseaux</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 70%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- À propos -->
+    <section id="apropos">
+        <h2 class="section-title">À Propos</h2>
+        <div class="about-container">
+            <div class="about-text">
+                <h3>Qui suis-je ?</h3>
+                <p>Étudiant en BUT Métiers du Multimédia et de l'Internet, passionné par la création numérique sous toutes ses formes.</p>
+                <p>Ma formation me permet d'acquérir des compétences en design, développement web, audiovisuel et communication digitale.</p>
+                <p>Créatif et curieux, j'explore de nouvelles technologies pour créer des expériences uniques.</p>
+            </div>
+            <div class="profile-container">
+                <img src="raf.jpg" alt="Photo de profil" class="profile-image">
+            </div>
+        </div>
+    </section>
+            <form class="contact-form">
+                <input type="text" placeholder="Votre Nom" required>
+                <input type="email" placeholder="Votre Email" required>
+                <textarea placeholder="Votre Message" rows="5" required></textarea>
+                <button type="submit" class="cta-button" style="width: 100%; border: none; cursor: pointer;">Envoyer</button>
+            </form>
+    </div>
+</section>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Crego Raphaël - Portfolio MMI</p>
+        <a href="mailto:rafcrego@gmail.com" class="email-link">rafcrego@gmail.com</a>
+        <div class="social-links">
+            <a href="mailto:rafcrego@gmail.com" class="social-link" aria-label="Email">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                </svg>
+            </a>
+            <a href="https://github.com" target="_blank" class="social-link" aria-label="GitHub">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/raf202b" target="_blank" class="social-link" aria-label="Instagram">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation active
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelectorAll('nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Modal
+        function openModal(type) {
+            document.getElementById(`modal-${type}`).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(type) {
+            document.getElementById(`modal-${type}`).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Progress bars
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progress = entry.target.querySelector('.progress');
+                    if (progress) {
+                        const width = progress.style.width;
+                        progress.style.width = '0';
+                        setTimeout(() => {
+                            progress.style.width = width;
+                        }, 300);
+                    }
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.skill-card').forEach(card => {
+            progressObserver.observe(card);
+        });
+    </script>
+</body>
+</html>
